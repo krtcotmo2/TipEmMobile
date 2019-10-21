@@ -1,12 +1,13 @@
 import React from 'react';
 import {Modal, View, Text, StyleSheet, TextInput, Button, Switch, Dimensions, Alert} from 'react-native';
+import Constants from "expo-constants";
 import TitleBar from '../components/TitleBar';
 import Slider from '../components/slider';
-import styleMain from './styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
 import Individual from '../components/individual';
 import AwesomeButton from "react-native-really-awesome-button";
 import {AdMobBanner} from 'expo-ads-admob';
+import styleMain from './styles.js';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -22,7 +23,7 @@ export default class Itemized extends React.Component{
     waySplit:1,
     includeTax:true,
     addedSoFar:0,
-    screenH: height - 75
+    screenH: 0
   }
   customStyles2 = StyleSheet.create({
     track: {
@@ -48,9 +49,19 @@ export default class Itemized extends React.Component{
     },
     modal:{
       backgroundColor:'green'
-    }
+    },
+    container2:{
+      flex:1,
+      backgroundColor:'#e2e0c5'
+    },
+    vStack2:{
+      flexDirection:"column",
+      alignItems:"stretch",
+      paddingTop:24
+    },
   });
   componentDidMount = () => {
+    this.setState({screenH: height - 100});
     for(let d= 0;d<this.state.numPeople;d++){
       let varName = 'person'+(d+1);
       this.setState({[varName]:[]});
@@ -130,7 +141,7 @@ export default class Itemized extends React.Component{
   }
    render(){
     return(
-      <View style={[styleMain.container, styleMain.vStack], {backgroundColor:'#ff0000'}}>
+      <View style={[this.customStyles2.container2, this.customStyles2.vStack2]}>
         <TitleBar navCommand={this.navToPage}/>
         <Modal
           animationType="fade"
@@ -140,7 +151,7 @@ export default class Itemized extends React.Component{
             this.setModalVisible(!this.state.modalVisible);
           }}
           presentationStyle="overFullScreen"
-          style={{height:this.state.screenH}}>
+          height = {this.state.screenH}>
           <View style={{backgroundColor:"#e2e0c5"}}>
           <View style={{marginTop: 22}}>
             <View>
@@ -178,7 +189,8 @@ export default class Itemized extends React.Component{
           </View>
           </View>
         </Modal>
-       
+        <ScrollView>
+          <View>  
         <View style={{flexDirection:'row'}}>
           <View style={this.customStyles2.halfCell}>
             <Text style={this.customStyles2.topicHeader}>Total Bill Including Tax</Text>
@@ -216,6 +228,7 @@ export default class Itemized extends React.Component{
         <View>
           <Text style={[this.customStyles2.topicHeader, {textAlign:'center'}]}>Tip Percentage: {this.state.tipPercent.toString()}%</Text>
         </View>
+
         <View style={{paddingHorizontal:25}}>
           <Slider name="tipPercent"
             minimumValue={0} 
@@ -236,14 +249,15 @@ export default class Itemized extends React.Component{
         <View style={{flexDirection:'row', height:50, justifyContent:'center', alignItems:'center', paddingHorizontal:10}}>
           <AwesomeButton backgroundColor='#FFDF00' textColor='rgb(3, 86, 41)' height={36} raiseLevel={1} onPress={() =>  this.props.navigation.navigate('Main')} >HOME</AwesomeButton>
         </View>
-       
+        </View>
+        </ScrollView>
         <AdMobBanner
               bannerSize="banner"
-              adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+              adUnitID={Constants.manifest.extra.adId}  // Test ID, Replace with your-admob-unit-id
               testDeviceID="EMULATOR"
               servePersonalizedAds // true or false
               onDidFailToReceiveAdWithError={this.bannerError}
-              style={{alignSelf:'center'}} />  
+              style={{alignSelf:'center', zIndex:100}} />  
     </View>
     );
   }

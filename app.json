@@ -30,6 +30,9 @@
     "android":{
       "googleMobileAdsAppId": "ca-app-pub-8219362811308516~7426947153" 
     },
-    "description": ""
+    "description": "Basic tool that allows users fo calculate tips. The tool allows you to split an entire bill or single items. Tips can range from 0 to 30.",
+    "extra":{
+      "adId" : "ca-app-pub-8219362811308516/9971576794"
+    }
   }
 }

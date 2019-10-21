@@ -1,4 +1,5 @@
 import React from 'react';
+import Constants from "expo-constants";
 import {View, Text, TextInput, ScrollView, Switch, StyleSheet} from 'react-native';
 import TitleBar from '../components/TitleBar';
 import Slider from '../components/slider';
@@ -6,7 +7,9 @@ import styleMain from './styles.js';
 import AwesomeButton from "react-native-really-awesome-button";
 import {AdMobBanner} from 'expo-ads-admob';
 
+
 export default class Even extends React.Component{
+  
   state = {
     tipPercent: 15,
     numPeople: 3,
@@ -146,7 +149,7 @@ export default class Even extends React.Component{
         </ScrollView>
         <AdMobBanner
               bannerSize="banner"
-              adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+              adUnitID={Constants.manifest.extra.adId} // Test ID, Replace with your-admob-unit-id
               testDeviceID="EMULATOR"
               servePersonalizedAds // true or false
               onDidFailToReceiveAdWithError={this.bannerError}

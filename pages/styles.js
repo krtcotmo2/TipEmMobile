@@ -10,6 +10,15 @@ export default StyleSheet.create({
     alignItems:"stretch",
     paddingTop:24
   },
+  container2:{
+    flex:1,
+    backgroundColor:'#e2e0c5'
+  },
+  vStack2:{
+    flexDirection:"column",
+    alignItems:"stretch",
+    paddingTop:24
+  },
   
   mainBackground: {
     backgroundColor: '#026670',

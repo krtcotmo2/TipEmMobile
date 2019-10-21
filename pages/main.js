@@ -2,40 +2,13 @@ import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
 import TitleBar from '../components/TitleBar';
 import styleMain from './styles.js';
-import {AdMobBanner,  AdMobInterstitial,  PublisherBanner,  AdMobRewarded} from 'expo-ads-admob';
 const { width } = Dimensions.get('window');
 
 export default class Main extends React.Component{
-  state={
-    numClicks:0
-  }
-
-  incClick=()=>{
-    this.setState({
-      numClicks: this.state.numClicks + 1
-    });
-  }
-
   navToPage = arg => {
-    if(arg.toLowerCase() !== 'help'){
-      this.incClick();
-    }
     this.props.navigation.navigate(arg, {backPage:'Main'});
   }
-  async componentDidMount(){
-    // AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712'); // Test ID, Replace with your-admob-unit-id
-    // AdMobInterstitial.setTestDeviceID('EMULATOR');
-    // await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true});
-    // await AdMobInterstitial.showAdAsync();
-  }
-  async componentDidUpdate(){
-    // if(this.state.numClicks%5 === 0){
-    //   AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712'); // Test ID, Replace with your-admob-unit-id
-    //   AdMobInterstitial.setTestDeviceID('EMULATOR');
-    //   await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true});
-    //   await AdMobInterstitial.showAdAsync();
-    // }
-  }
+
 
   render(){
     return(
@@ -72,13 +45,7 @@ export default class Main extends React.Component{
             <Image source={require('../assets/itemize.png')} style={{alignSelf:'center'}}/>            
           </View>
         </TouchableWithoutFeedback>  
-        {/* <AdMobBanner
-          bannerSize="banner"
-          adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
-          testDeviceID="EMULATOR"
-          servePersonalizedAds // true or false
-          onDidFailToReceiveAdWithError={this.bannerError}
-          style={{alignSelf:'center'}} />       */}
+       
       </View>
     );
   }
