@@ -7,7 +7,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Individual from '../components/individual';
 import AwesomeButton from "react-native-really-awesome-button";
 import {AdMobBanner} from 'expo-ads-admob';
-import styleMain from './styles.js';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
